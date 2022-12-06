@@ -18,7 +18,7 @@ export const addonsData = [
     },
   },
   {
-    name: "Customizable Profile",
+    name: "Customizable profile",
     selected: false,
     text: "Custom theme on your profile",
     price: {
