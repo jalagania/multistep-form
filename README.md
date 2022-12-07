@@ -2,10 +2,10 @@
 
 ### Links
 
-- Live Site URL:
+- Live Site URL: https://multistep-form-beka.netlify.app
 
 ### Built with
 
 - HTML5
-- Tailwind
+- Tailwind CSS
 - React
