@@ -31,19 +31,17 @@ function AppProvider(props) {
         setShowStepOne(false);
         setShowStepTwo(true);
       }
-      if (inputName === "") {
+      if (!inputName) {
         setErrorName(true);
       } else {
         setErrorName(false);
       }
-
-      if (inputEmail === "") {
+      if (!inputEmail) {
         setErrorEmail(true);
       } else {
         setErrorEmail(false);
       }
-
-      if (inputPhone === "") {
+      if (!inputPhone) {
         setErrorPhone(true);
       } else {
         setErrorPhone(false);
@@ -59,6 +57,7 @@ function AppProvider(props) {
       setShowStepThree(false);
       setShowStepFour(true);
     }
+
     if (showStepFour) {
       setShowStepFour(false);
       setShowStepFive(true);
