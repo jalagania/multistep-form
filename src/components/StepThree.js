@@ -1,6 +1,10 @@
+import { useContext } from "react";
+import { AppContext } from "../context";
 import check from "../images/icon-checkmark.svg";
 
-function StepThree(props) {
+function StepThree() {
+  const ctx = useContext(AppContext);
+
   return (
     <div>
       <h1 className="mt-3 mb-4 text-5xl font-bold text-blueMarine phone:text-4xl">
@@ -10,7 +14,7 @@ function StepThree(props) {
         Add-ons help enhance your gaming experience.
       </p>
       <div className="flex flex-col gap-6">
-        {props.addons.map((addon, index) => {
+        {ctx.addons.map((addon, index) => {
           return (
             <div
               key={index}
@@ -20,7 +24,7 @@ function StepThree(props) {
                   : "border-grayLight"
               } flex cursor-pointer items-center gap-8 rounded-2xl border border-solid border-grayLight px-8 py-6 hover:border-bluePurplish`}
               onClick={() =>
-                props.setAddons((prevState) => {
+                ctx.setAddons((prevState) => {
                   return [
                     ...prevState.slice(0, index),
                     {
@@ -51,7 +55,7 @@ function StepThree(props) {
               </div>
               <p className="ml-auto font-medium text-bluePurplish">
                 {`$${
-                  props.monthly
+                  ctx.monthly
                     ? addon.price.monthly + "/mo"
                     : addon.price.yearly + "/yr"
                 }`}

@@ -1,38 +1,41 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
+import { AppContext } from "../context";
 
-function StepOne(props) {
+function StepOne() {
+  const ctx = useContext(AppContext);
+
   function handleNameChange(event) {
     if (
       /^[A-Za-z\s]*$/.test(event.target.value) &&
       event.target.value.length < 20
     ) {
-      props.setInputName(event.target.value);
+      ctx.setInputName(event.target.value);
     }
   }
 
   function handleEmailChange(event) {
     if (event.target.value.length < 20) {
-      props.setInputEmail(event.target.value);
+      ctx.setInputEmail(event.target.value);
     }
   }
 
   function handlePhoneChange(event) {
     if (/^[0-9]*$/.test(event.target.value) && event.target.value.length < 12) {
-      props.setInputPhone(event.target.value);
+      ctx.setInputPhone(event.target.value);
     }
   }
 
   useEffect(() => {
     if (
-      props.inputName !== "" &&
-      props.inputEmail !== "" &&
-      props.inputPhone !== ""
+      ctx.inputName !== "" &&
+      ctx.inputEmail !== "" &&
+      ctx.inputPhone !== ""
     ) {
-      props.setStepOneIsValid(true);
+      ctx.setStepOneIsValid(true);
     } else {
-      props.setStepOneIsValid(false);
+      ctx.setStepOneIsValid(false);
     }
-  }, [props.inputName, props.inputEmail, props.inputPhone]);
+  }, [ctx.inputName, ctx.inputEmail, ctx.inputPhone]);
 
   return (
     <form>
@@ -46,20 +49,18 @@ function StepOne(props) {
         <label className="text-blueMarine" htmlFor="name">
           Name
         </label>
-        <p
-          className={`${props.errorName ? "" : "invisible"} text-redStrawberry`}
-        >
+        <p className={`${ctx.errorName ? "" : "invisible"} text-redStrawberry`}>
           This field is required
         </p>
       </div>
       <input
         className={`${
-          props.errorPhone ? "border-redStrawberry" : ""
+          ctx.errorPhone ? "border-redStrawberry" : ""
         } mt-2 mb-8 block w-full rounded-xl border border-solid border-grayCool px-6 py-4 font-medium tracking-tight focus:border-bluePurplish`}
         type="text"
         id="name"
         placeholder="e.g. Stephen King"
-        value={props.inputName}
+        value={ctx.inputName}
         onChange={handleNameChange}
       />
       <div className="flex justify-between">
@@ -67,21 +68,19 @@ function StepOne(props) {
           Email Address
         </label>
         <p
-          className={`${
-            props.errorEmail ? "" : "invisible"
-          } text-redStrawberry`}
+          className={`${ctx.errorEmail ? "" : "invisible"} text-redStrawberry`}
         >
           This field is required
         </p>
       </div>
       <input
         className={`${
-          props.errorPhone ? "border-redStrawberry" : ""
+          ctx.errorPhone ? "border-redStrawberry" : ""
         } mb-8 mt-2 block w-full rounded-xl border border-solid border-grayCool px-6 py-4 font-medium tracking-tight focus:border-bluePurplish`}
         type="email"
         id="email"
         placeholder="e.g. stephenking@lorem.com"
-        value={props.inputEmail}
+        value={ctx.inputEmail}
         onChange={handleEmailChange}
       />
       <div className="flex justify-between">
@@ -89,21 +88,19 @@ function StepOne(props) {
           Phone Number
         </label>
         <p
-          className={`${
-            props.errorPhone ? "" : "invisible"
-          } text-redStrawberry`}
+          className={`${ctx.errorPhone ? "" : "invisible"} text-redStrawberry`}
         >
           This field is required
         </p>
       </div>
       <input
         className={`${
-          props.errorPhone ? "border-redStrawberry" : ""
+          ctx.errorPhone ? "border-redStrawberry" : ""
         } mb-8 mt-2 block w-full rounded-xl border border-solid border-grayCool px-6 py-4 font-medium tracking-tight focus:border-bluePurplish`}
         type="tel"
         id="phone"
         placeholder="e.g. +1 234 567 890"
-        value={props.inputPhone}
+        value={ctx.inputPhone}
         onChange={handlePhoneChange}
       />
     </form>

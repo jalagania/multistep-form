@@ -1,20 +1,23 @@
+import { useContext } from "react";
+import { AppContext } from "../context";
 import { plansData } from "../plans-data";
 
-function StepFour(props) {
+function StepFour() {
+  const ctx = useContext(AppContext);
   let planPrice,
     totalPrice = 0;
 
   plansData.forEach((plan) => {
-    if (plan.name === props.selectedPlan) {
-      planPrice = props.monthly ? plan.price.monthly : plan.price.yearly;
+    if (plan.name === ctx.selectedPlan) {
+      planPrice = ctx.monthly ? plan.price.monthly : plan.price.yearly;
     }
   });
 
   totalPrice += planPrice;
 
   function handleChangeButton() {
-    props.setShowStepFour(false);
-    props.setShowStepTwo(true);
+    ctx.setShowStepFour(false);
+    ctx.setShowStepTwo(true);
   }
 
   return (
@@ -28,8 +31,8 @@ function StepFour(props) {
       <div className="rounded-2xl bg-[#F8F9FE] p-8">
         <div className="flex items-center justify-between border-b border-b-grayLight pb-8">
           <div>
-            <p className="font-bold text-blueMarine">{`${props.selectedPlan} (${
-              props.monthly ? "Monthly" : "Yearly"
+            <p className="font-bold text-blueMarine">{`${ctx.selectedPlan} (${
+              ctx.monthly ? "Monthly" : "Yearly"
             })`}</p>
             <button
               className="text-grayCool underline hover:text-bluePurplish"
@@ -39,12 +42,12 @@ function StepFour(props) {
             </button>
           </div>
           <p className="font-bold text-blueMarine">
-            ${planPrice + (props.monthly ? "/mo" : "/yr")}
+            ${planPrice + (ctx.monthly ? "/mo" : "/yr")}
           </p>
         </div>
-        {props.addons.map((addon, index) => {
+        {ctx.addons.map((addon, index) => {
           if (addon.selected) {
-            const addonPrice = props.monthly
+            const addonPrice = ctx.monthly
               ? addon.price.monthly
               : addon.price.yearly;
             totalPrice += addonPrice;
@@ -53,7 +56,7 @@ function StepFour(props) {
                 <p className="text-grayCool">{addon.name}</p>
                 <p className="font-medium text-blueMarine">
                   $
-                  {props.monthly
+                  {ctx.monthly
                     ? addon.price.monthly + "/mo"
                     : addon.price.yearly + "/yr"}
                 </p>
@@ -65,10 +68,10 @@ function StepFour(props) {
       </div>
       <div className="flex items-center justify-between p-8">
         <p className="text-grayCool">{`Total (per ${
-          props.monthly ? "month" : "year"
+          ctx.monthly ? "month" : "year"
         })`}</p>
         <p className="text-4xl font-bold text-bluePurplish">
-          +${totalPrice + (props.monthly ? "/mo" : "/yr")}
+          +${totalPrice + (ctx.monthly ? "/mo" : "/yr")}
         </p>
       </div>
     </div>
