@@ -52,12 +52,10 @@ function AppProvider(props) {
       setShowStepTwo(false);
       setShowStepThree(true);
     }
-
     if (showStepThree) {
       setShowStepThree(false);
       setShowStepFour(true);
     }
-
     if (showStepFour) {
       setShowStepFour(false);
       setShowStepFive(true);
